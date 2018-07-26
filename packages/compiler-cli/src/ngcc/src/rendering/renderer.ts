@@ -16,6 +16,7 @@ import * as ts from 'typescript';
 import {Decorator} from '../../../ngtsc/host';
 import {ImportManager, translateStatement} from '../../../ngtsc/transform';
 import {AnalyzedClass, AnalyzedFile} from '../analyzer';
+import {IMPORT_PREFIX} from '../constants';
 import {NgccReflectionHost} from '../host/ngcc_host';
 
 interface SourceMapInfo {
@@ -71,7 +72,7 @@ export abstract class Renderer {
    * @param targetPath The absolute path where the rendered file will be written.
    */
   renderFile(file: AnalyzedFile, targetPath: string): RenderResult {
-    const importManager = new ImportManager(false, 'ɵngcc');
+    const importManager = new ImportManager(false, IMPORT_PREFIX);
     const input = this.extractSourceMap(file.sourceFile);
 
     const outputText = new MagicString(input.source);
