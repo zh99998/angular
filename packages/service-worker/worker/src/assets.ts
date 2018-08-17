@@ -161,9 +161,9 @@ export abstract class AssetGroup {
     const parsed = this.adapter.parseUrl(url, this.scope.registration.scope);
     if (parsed.origin === this.origin) {
       // The URL is relative to the SW's origin domain.
-      return parsed.path;
+      return decodeURI(parsed.path);
     } else {
-      return url;
+      return decodeURI(url);
     }
   }
 
